@@ -1,7 +1,7 @@
 # Springboot-backend-CareerManagementSystem
 
 ## CareerManagementSystem 설명
-https://parkprin.tistory.com/9?category=904516
+https://parkprin.tistory.com/8?category=904513
 
 ## Springboot-backend-CareerManagementSystem 역할
 이력관리 플랫폼에서 백엔드처리를 전담한다.
