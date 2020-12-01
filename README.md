@@ -1,7 +1,10 @@
 # Springboot-backend-CareerManagementSystem
 
 ## CareerManagementSystem 설명
-https://parkprin.tistory.com/8?category=904513
+[이력관리플랫폼 설계서](https://parkprin.tistory.com/8?category=904513)
+
+## CareerManagementSystem ERD
+[이력관리플랫폼 ERD](https://www.erdcloud.com/d/6RYXSBAYwXSFnWniQ)
 
 ## Springboot-backend-CareerManagementSystem 역할
 이력관리 플랫폼에서 백엔드처리를 전담한다.
@@ -11,3 +14,5 @@ https://parkprin.tistory.com/8?category=904513
 3) 보안: 인증받은 사용자에게만 데이터를 허용해주며, 권한에 따라 제공하는 데이터를 제어한다.
 
 ## 각 단계별 진행 내용 정리
+1) ERD를 이용한 유저에 대한 설계를 진행한다
+2) 설계된 내용을 기초로 Domain을 그리고 기능을 구현한다.
