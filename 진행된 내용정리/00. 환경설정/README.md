@@ -48,10 +48,10 @@ dependencies {가
 docker run -d \
 -p 2012:3306 \
 --name CareerManagementPlatform-db \
--e MYSQL_ROOT_PASSWORD=dlfur12345 \
+-e MYSQL_ROOT_PASSWORD=루트 비밀번호 \
 -e MYSQL_DATABASE=career_management_platform \
 -e MYSQL_USER=cmp_admin \
--e MYSQL_PASSWORD=dlfur12345 \
+-e MYSQL_PASSWORD=cmp_admin의 비밀번호 \
 mariadb:latest
 ```
 
