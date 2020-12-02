@@ -30,9 +30,11 @@ public class UserRepositoryTest {
 
     @Test
     public void 계정저장_불러오기() {
+        String userId = "chris123";
         String userNicname = "chris";
         String password = "chris%123";
         userRepository.save(User.builder()
+                .userId(userId)
                 .userNickname(userNicname)
                 .password(bCryptPasswordEncoder.encode(password))
                 .version(new Long(1))
@@ -48,5 +50,25 @@ public class UserRepositoryTest {
         User user = userList.get(0);
         assertThat(user.getUserNickname()).isEqualTo(userNicname);
         assertThat(bCryptPasswordEncoder.matches(user.getPassword(), password));
+    }
+
+    @Test
+    public void 유저아이디로_자동생성된_유저테이블_아이디_불러오기() {
+        String userId = "chris123";
+        String userNicname = "chris";
+        String password = "chris%123";
+        userRepository.save(User.builder()
+                .userId(userId)
+                .userNickname(userNicname)
+                .password(bCryptPasswordEncoder.encode(password))
+                .version(new Long(1))
+                .createIp("localhost")
+                .lastPasswordChanged(LocalDateTime.now())
+                .lastUpdateIp("localhost")
+                .passwordExpired(false)
+                .withdraw(false)
+                .build());
+        User user = userRepository.selectByUserId(userId);
+        assertThat(user.getUserId()).isEqualTo(userId);
     }
 }

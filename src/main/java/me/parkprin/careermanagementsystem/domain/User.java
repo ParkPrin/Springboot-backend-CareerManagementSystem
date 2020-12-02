@@ -14,7 +14,10 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
+
+    @Column(unique = true, nullable = false)
+    private String userId;
 
     @Column(nullable = false)
     private Long version;
@@ -47,10 +50,11 @@ public class User extends BaseTimeEntity {
     private boolean withdraw;
 
     @Builder
-    public User(String userNickname, String password, Long version,
+    public User(String userNickname, String userId, String password, Long version,
                 boolean accountExpired, boolean accountLocked, String createIp,
                 LocalDateTime dateWithdraw, boolean enabled, LocalDateTime lastPasswordChanged,
                 String lastUpdateIp, boolean passwordExpired, boolean withdraw){
+        this.userId = userId;
         this.userNickname = userNickname;
         this.password = password;
         this.version = version;

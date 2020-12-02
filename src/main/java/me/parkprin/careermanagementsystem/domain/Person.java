@@ -25,7 +25,7 @@ public class Person extends BaseTimeEntity {
     @Column(length = 100, nullable = false)
     private String email;
 
-    @Column(length = 13, nullable = false)
+    @Column(length = 13, nullable = true)
     private String cellphone;
 
     @Builder

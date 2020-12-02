@@ -35,9 +35,11 @@ public class LoggedInRepositoryTest {
 
     @Test
     public void 로그저장_불러오기() {
+        String userId = "chris123";
         String userNicname = "chris";
         String password = "chris%123";
         userRepository.save(User.builder()
+                .userId(userId)
                 .userNickname(userNicname)
                 .password(bCryptPasswordEncoder.encode(password))
                 .version(new Long(1))
