@@ -14,5 +14,4 @@
 3) 보안: 인증받은 사용자에게만 데이터를 허용해주며, 권한에 따라 제공하는 데이터를 제어한다.
 
 ## 각 단계별 진행 내용 정리
-1) ERD를 이용한 유저에 대한 설계를 진행한다
-2) 설계된 내용을 기초로 Domain을 그리고 기능을 구현한다.
+1) [환경구성](https://github.com/ParkPrin/Springboot-backend-CareerManagementSystem/blob/ERDandJPA/%EC%A7%84%ED%96%89%EB%90%9C%20%EB%82%B4%EC%9A%A9%EC%A0%95%EB%A6%AC/00.%20%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/README.md)
