@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import me.parkprin.careermanagementsystem.domain.*;
+import me.parkprin.careermanagementsystem.dto.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.UserAndPersonDTO;
 import me.parkprin.careermanagementsystem.service.UserAndPersonService;
 import org.junit.After;
@@ -12,11 +13,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -27,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.BDDAssertions.then;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -36,6 +42,9 @@ public class UserAndPersonControllerTest {
     private WebApplicationContext context;
 
     private MockMvc mvc;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Autowired
     UserRepository userRepository;
@@ -94,5 +103,41 @@ public class UserAndPersonControllerTest {
         assertThat(userList.size()).isEqualTo(1);
         assertThat(personList.size()).isEqualTo(1);
         assertThat(loggedInList.size()).isEqualTo(1);
+    }
+
+    @Test
+    @WithMockUser(username = "spring")
+    public void API로_로그인() throws Exception {
+        UserAndPersonDTO userAndPerson = UserAndPersonDTO.builder().
+                userId("chris123")
+                .password("test")
+                .nickName("chris")
+                .email("chris@gmail.com")
+                .cellPhone("010-1111-2222")
+                .build();
+
+        String url = "http://localhost:" + port + "/user/api/v1";
+
+        MediaType MEDIA_TYPE_JSON_UTF8 = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(userAndPerson);
+
+        mvc.perform(post(url)
+                .contentType(MEDIA_TYPE_JSON_UTF8)
+                .accept("*/*")
+                .content(requestJson))
+                .andExpect(status().isOk());
+
+        MvcResult mvcResult = mvc.perform(get(url)
+                .contentType(MEDIA_TYPE_JSON_UTF8)
+                .accept("*/*")
+                .content(requestJson))
+                .andExpect(status().isOk())
+                .andReturn();
+        ResponseDTO responseDTO = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), ResponseDTO.class);
+        assertThat(responseDTO.getState()).isEqualTo(200);
+
     }
 }

@@ -33,6 +33,21 @@ public class UserAndPersonController {
                     .responseType("Exception Message")
                     .responseValue(e.getMessage()).build();
         }
+    }
 
+    @GetMapping("/v1")
+    public ResponseDTO login(@RequestBody UserAndPersonDTO userAndPersonDTO){
+        userAndPersonDTO.setVersion(V_1);
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("loginCode")
+                    .responseValue(userAndPersonService.login(
+                            userAndPersonDTO.getUserId(), userAndPersonDTO.getPassword()))
+                    .build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
     }
 }
