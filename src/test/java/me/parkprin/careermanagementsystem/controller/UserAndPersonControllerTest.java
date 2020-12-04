@@ -84,7 +84,7 @@ public class UserAndPersonControllerTest {
                 .cellPhone("010-1111-2222")
                 .build();
 
-        String url = "http://localhost:" + port + "/user/api/v1";
+        String url = "http://localhost:" + port + "/user/api/join/v1";
 
         MediaType MEDIA_TYPE_JSON_UTF8 = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         ObjectMapper mapper = new ObjectMapper();
@@ -116,7 +116,7 @@ public class UserAndPersonControllerTest {
                 .cellPhone("010-1111-2222")
                 .build();
 
-        String url = "http://localhost:" + port + "/user/api/v1";
+        String url = "http://localhost:" + port + "/user/api/login/v1";
 
         MediaType MEDIA_TYPE_JSON_UTF8 = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
         ObjectMapper mapper = new ObjectMapper();
@@ -130,7 +130,7 @@ public class UserAndPersonControllerTest {
                 .content(requestJson))
                 .andExpect(status().isOk());
 
-        MvcResult mvcResult = mvc.perform(get(url)
+        MvcResult mvcResult = mvc.perform(post(url)
                 .contentType(MEDIA_TYPE_JSON_UTF8)
                 .accept("*/*")
                 .content(requestJson))

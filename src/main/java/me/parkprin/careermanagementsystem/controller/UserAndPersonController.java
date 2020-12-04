@@ -21,7 +21,7 @@ public class UserAndPersonController {
     @Autowired
     CommonUtils commonUtils;
 
-    @PostMapping("/v1")
+    @PostMapping("/join/v1")
     public ResponseDTO join(@RequestBody UserAndPersonDTO userAndPersonDTO){
         userAndPersonDTO.setVersion(V_1);
         try {
@@ -35,7 +35,7 @@ public class UserAndPersonController {
         }
     }
 
-    @GetMapping("/v1")
+    @PostMapping("/login/v1")
     public ResponseDTO login(@RequestBody UserAndPersonDTO userAndPersonDTO){
         userAndPersonDTO.setVersion(V_1);
         try {
