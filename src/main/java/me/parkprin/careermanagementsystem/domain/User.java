@@ -49,6 +49,12 @@ public class User extends BaseTimeEntity {
     @Column(columnDefinition = "boolean default false")
     private boolean withdraw;
 
+    @Column
+    private LocalDateTime dateCreated;
+
+    @Column
+    private LocalDateTime lastUpdated;
+
     @Builder
     public User(String userNickname, String userId, String password, Long version,
                 boolean accountExpired, boolean accountLocked, String createIp,
@@ -63,9 +69,11 @@ public class User extends BaseTimeEntity {
         this.createIp = createIp;
         this.dateWithdraw = dateWithdraw;
         this.enabled = enabled;
-        this.lastPasswordChanged = lastPasswordChanged;
+        this.lastPasswordChanged = LocalDateTime.now();
         this.lastUpdateIp = lastUpdateIp;
         this.passwordExpired = passwordExpired;
         this.withdraw = withdraw;
+        this.dateCreated = LocalDateTime.now();
+        this.lastUpdated = LocalDateTime.now();
     }
 }

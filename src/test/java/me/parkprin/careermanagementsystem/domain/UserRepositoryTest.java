@@ -49,7 +49,7 @@ public class UserRepositoryTest {
 
         User user = userList.get(0);
         assertThat(user.getUserNickname()).isEqualTo(userNicname);
-        assertThat(bCryptPasswordEncoder.matches(user.getPassword(), password));
+        assertThat(bCryptPasswordEncoder.matches(password, user.getPassword()));
     }
 
     @Test

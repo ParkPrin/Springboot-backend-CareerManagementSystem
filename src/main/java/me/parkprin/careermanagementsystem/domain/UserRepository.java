@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT u.* FROM user u WHERE u.user_id = :userId", nativeQuery = true)
+    @Query(value = "SELECT u.* FROM user u WHERE u.user_id = :userId ", nativeQuery = true)
     User selectByUserId(@Param("userId") String userId);
 }
