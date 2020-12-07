@@ -55,6 +55,9 @@ public class User extends BaseTimeEntity {
     @Column
     private LocalDateTime lastUpdated;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDelete;
+
     @Builder
     public User(String userNickname, String userId, String password, Long version,
                 boolean accountExpired, boolean accountLocked, String createIp,

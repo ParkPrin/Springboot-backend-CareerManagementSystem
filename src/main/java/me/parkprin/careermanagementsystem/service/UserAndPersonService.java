@@ -24,6 +24,12 @@ public class UserAndPersonService {
     PersonRepository personRepository;
 
     @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    RoleMappingUserRepository roleMappingUserRepository;
+
+    @Autowired
     LoggedInRepository loggedInRepository;
 
     /**
@@ -122,30 +128,48 @@ public class UserAndPersonService {
 
 
     public UserAndPersonDTO join(UserAndPersonDTO userAndPerson){
+        try {
+            User user = userRepository.save(User.builder()
+                    .userId(userAndPerson.getUserId())
+                    .userNickname(userAndPerson.getNickName())
+                    .password(bCryptPasswordEncoder.encode(userAndPerson.getPassword()))
+                    .version(userAndPerson.getVersion())
+                    .createIp("localhost")
+                    .lastPasswordChanged(LocalDateTime.now())
+                    .lastUpdateIp("localhost")
+                    .passwordExpired(false)
+                    .withdraw(false)
+                    .build());
+            personRepository.save(Person.builder()
+                    .user(user).version(userAndPerson.getVersion())
+                    .email(userAndPerson.getEmail())
+                    .cellphone(userAndPerson.getCellPhone()).build());
 
-        User user = userRepository.save(User.builder()
-                .userId(userAndPerson.getUserId())
-                .userNickname(userAndPerson.getNickName())
-                .password(bCryptPasswordEncoder.encode(userAndPerson.getPassword()))
-                .version(userAndPerson.getVersion())
-                .createIp("localhost")
-                .lastPasswordChanged(LocalDateTime.now())
-                .lastUpdateIp("localhost")
-                .passwordExpired(false)
-                .withdraw(false)
-                .build());
-        personRepository.save(Person.builder()
-                .user(user).version(userAndPerson.getVersion())
-                .email(userAndPerson.getEmail())
-                .cellphone(userAndPerson.getCellPhone()).build());
+            if (roleRepository.findAll().size() == 0 ){
+                roleRepository.save(
+                        Role.builder()
+                                .roleId("user")
+                                .roleName("사용자")
+                                .isAdmin(false)
+                                .build());
+            }
+            roleMappingUserRepository.save(
+                    RoleMappingUser.builder()
+                            .user(user)
+                            .role(roleRepository.selectByRoleId("user"))
+                            .build());
 
-        loggedInRepository.save(LoggedIn.builder()
-                .user(user)
-                .version(userAndPerson.getVersion())
-                .dateCreate(LocalDateTime.now())
-                .message("메세지 코드 - 회원 가입자: " + user.getUserId() )
-                .build());
-        userAndPerson.setPassword(userRepository.selectByUserId(userAndPerson.getUserId()).getPassword());
+            loggedInRepository.save(LoggedIn.builder()
+                    .user(user)
+                    .version(userAndPerson.getVersion())
+                    .dateCreate(LocalDateTime.now())
+                    .message("메세지 코드 - 회원 가입자: " + user.getUserId() )
+                    .build());
+
+            userAndPerson.setPassword(userRepository.selectByUserId(userAndPerson.getUserId()).getPassword());
+        } catch (Exception e){
+
+        }
         return userAndPerson;
     }
 
