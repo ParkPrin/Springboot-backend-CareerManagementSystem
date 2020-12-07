@@ -1,7 +1,16 @@
 package me.parkprin.careermanagementsystem.service;
 
-import me.parkprin.careermanagementsystem.domain.*;
-import me.parkprin.careermanagementsystem.dto.UserAndPersonDTO;
+import me.parkprin.careermanagementsystem.domain.loggedin.LoggedIn;
+import me.parkprin.careermanagementsystem.domain.loggedin.LoggedInRepository;
+import me.parkprin.careermanagementsystem.domain.person.Person;
+import me.parkprin.careermanagementsystem.domain.person.PersonRepository;
+import me.parkprin.careermanagementsystem.domain.role.Role;
+import me.parkprin.careermanagementsystem.domain.role.RoleRepository;
+import me.parkprin.careermanagementsystem.domain.rolemappinguser.RoleMappingUser;
+import me.parkprin.careermanagementsystem.domain.rolemappinguser.RoleMappingUserRepository;
+import me.parkprin.careermanagementsystem.domain.user.User;
+import me.parkprin.careermanagementsystem.domain.user.UserRepository;
+import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

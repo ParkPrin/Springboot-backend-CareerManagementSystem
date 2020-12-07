@@ -1,7 +1,10 @@
 package me.parkprin.careermanagementsystem.service;
 
-import me.parkprin.careermanagementsystem.domain.*;
-import me.parkprin.careermanagementsystem.dto.UserAndPersonDTO;
+import me.parkprin.careermanagementsystem.domain.loggedin.LoggedIn;
+import me.parkprin.careermanagementsystem.domain.loggedin.LoggedInRepository;
+import me.parkprin.careermanagementsystem.domain.person.PersonRepository;
+import me.parkprin.careermanagementsystem.domain.user.UserRepository;
+import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package me.parkprin.careermanagementsystem.domain;
+package me.parkprin.careermanagementsystem.domain.role;
 
 import lombok.Builder;
 import lombok.Getter;

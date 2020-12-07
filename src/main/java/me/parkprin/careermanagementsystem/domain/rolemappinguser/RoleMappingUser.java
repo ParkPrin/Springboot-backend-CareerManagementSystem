@@ -1,8 +1,10 @@
-package me.parkprin.careermanagementsystem.domain;
+package me.parkprin.careermanagementsystem.domain.rolemappinguser;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.parkprin.careermanagementsystem.domain.user.User;
+import me.parkprin.careermanagementsystem.domain.role.Role;
 
 import javax.persistence.*;
 

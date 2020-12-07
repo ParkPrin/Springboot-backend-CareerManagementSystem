@@ -1,5 +1,11 @@
 package me.parkprin.careermanagementsystem.domain;
 
+import me.parkprin.careermanagementsystem.domain.role.Role;
+import me.parkprin.careermanagementsystem.domain.role.RoleRepository;
+import me.parkprin.careermanagementsystem.domain.rolemappinguser.RoleMappingUser;
+import me.parkprin.careermanagementsystem.domain.rolemappinguser.RoleMappingUserRepository;
+import me.parkprin.careermanagementsystem.domain.user.User;
+import me.parkprin.careermanagementsystem.domain.user.UserRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

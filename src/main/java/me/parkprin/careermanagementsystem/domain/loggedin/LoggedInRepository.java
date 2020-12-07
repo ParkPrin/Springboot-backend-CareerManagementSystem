@@ -1,4 +1,4 @@
-package me.parkprin.careermanagementsystem.domain;
+package me.parkprin.careermanagementsystem.domain.loggedin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

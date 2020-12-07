@@ -1,8 +1,9 @@
-package me.parkprin.careermanagementsystem.domain;
+package me.parkprin.careermanagementsystem.domain.loggedin;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.parkprin.careermanagementsystem.domain.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

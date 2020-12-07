@@ -1,8 +1,8 @@
-package me.parkprin.careermanagementsystem.controller;
+package me.parkprin.careermanagementsystem.controller.userandperson;
 
 import me.parkprin.careermanagementsystem.common.CommonUtils;
-import me.parkprin.careermanagementsystem.dto.ResponseDTO;
-import me.parkprin.careermanagementsystem.dto.UserAndPersonDTO;
+import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
+import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import me.parkprin.careermanagementsystem.service.UserAndPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,5 +1,6 @@
-package me.parkprin.careermanagementsystem.domain;
+package me.parkprin.careermanagementsystem.domain.rolemappinguser;
 
+import me.parkprin.careermanagementsystem.domain.rolemappinguser.RoleMappingUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

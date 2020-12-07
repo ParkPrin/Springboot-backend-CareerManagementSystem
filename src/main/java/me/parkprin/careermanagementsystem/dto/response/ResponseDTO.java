@@ -1,4 +1,4 @@
-package me.parkprin.careermanagementsystem.dto;
+package me.parkprin.careermanagementsystem.dto.response;
 
 import lombok.*;
 
