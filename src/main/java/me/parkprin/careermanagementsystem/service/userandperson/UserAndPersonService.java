@@ -1,4 +1,4 @@
-package me.parkprin.careermanagementsystem.service;
+package me.parkprin.careermanagementsystem.service.userandperson;
 
 import me.parkprin.careermanagementsystem.domain.loggedin.LoggedIn;
 import me.parkprin.careermanagementsystem.domain.loggedin.LoggedInRepository;

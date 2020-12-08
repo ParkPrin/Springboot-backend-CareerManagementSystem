@@ -3,7 +3,7 @@ package me.parkprin.careermanagementsystem.controller.userandperson;
 import me.parkprin.careermanagementsystem.common.CommonUtils;
 import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
-import me.parkprin.careermanagementsystem.service.UserAndPersonService;
+import me.parkprin.careermanagementsystem.service.userandperson.UserAndPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,6 @@ public class UserAndPersonController {
 
     @Autowired
     UserAndPersonService userAndPersonService;
-
-    @Autowired
-    CommonUtils commonUtils;
 
     @PostMapping("/join/v1")
     public ResponseDTO join(@RequestBody UserAndPersonDTO userAndPersonDTO){

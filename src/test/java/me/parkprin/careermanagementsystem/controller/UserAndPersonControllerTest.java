@@ -11,7 +11,7 @@ import me.parkprin.careermanagementsystem.domain.user.User;
 import me.parkprin.careermanagementsystem.domain.user.UserRepository;
 import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
-import me.parkprin.careermanagementsystem.service.UserAndPersonService;
+import me.parkprin.careermanagementsystem.service.userandperson.UserAndPersonService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

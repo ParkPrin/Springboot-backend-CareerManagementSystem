@@ -5,6 +5,7 @@ import me.parkprin.careermanagementsystem.domain.loggedin.LoggedInRepository;
 import me.parkprin.careermanagementsystem.domain.person.PersonRepository;
 import me.parkprin.careermanagementsystem.domain.user.UserRepository;
 import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
+import me.parkprin.careermanagementsystem.service.userandperson.UserAndPersonService;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
