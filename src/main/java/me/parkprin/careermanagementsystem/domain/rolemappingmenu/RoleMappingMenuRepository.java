@@ -13,5 +13,5 @@ public interface RoleMappingMenuRepository extends JpaRepository<RoleMappingMenu
     List<RoleMappingMenu> selectByRoleId(@Param("roleId") Long roleId);
 
     @Query(value = "SELECT umm.* FROM role_mapping_menu umm WHERE umm.menuId = :menuId", nativeQuery = true)
-    List<RoleMappingMenu> selectByMenu(@Param("menuId") Long menuId);
+    List<RoleMappingMenu> selectByMenuId(@Param("menuId") Long menuId);
 }

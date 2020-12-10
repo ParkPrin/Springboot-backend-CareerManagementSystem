@@ -91,13 +91,13 @@ public class InitDataBatch {
              * RoleMappingMenu에 대한 데이터 초기 세팅
              */
 
-            Role userRole = roleRepository.selectByRoleId("user");
-            Role adminRole = roleRepository.selectByRoleId("admin");
-            Menu menuMain = menuRepository.selectByMenuId("main");
-            Menu careerManagement = menuRepository.selectByMenuId("career management");
-            Menu careerPortal = menuRepository.selectByMenuId("career portal");
-
             if (roleMappingMenuRepository.findAll().size() == 0){
+
+                Role userRole = roleRepository.selectByRoleId("user");
+                Role adminRole = roleRepository.selectByRoleId("admin");
+                Menu menuMain = menuRepository.selectByMenuId("main");
+                Menu careerManagement = menuRepository.selectByMenuId("career management");
+                Menu careerPortal = menuRepository.selectByMenuId("career portal");
                 roleMappingMenuRepository.save(RoleMappingMenu.builder().role(userRole).menu(menuMain).build());
                 roleMappingMenuRepository.save(RoleMappingMenu.builder().role(userRole).menu(careerManagement).build());
                 roleMappingMenuRepository.save(RoleMappingMenu.builder().role(userRole).menu(careerPortal).build());
