@@ -1,5 +1,6 @@
 package me.parkprin.careermanagementsystem.domain.resume;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.parkprin.careermanagementsystem.domain.BaseTimeEntity;
@@ -43,4 +44,18 @@ public class Resume extends BaseTimeEntity {
 
     @Column
     private LocalDateTime lastUpdated;
+
+    @Builder
+    public Resume (User user, Image image, String resumeName,
+                   String career, String resumeSalary, String resumeSummary,
+                    LocalDateTime dateCreated, LocalDateTime lastUpdated) {
+        this.user = user;
+        this.image = image;
+        this.resumeName = resumeName;
+        this.career = career;
+        this.resumeSalary = resumeSalary;
+        this.resumeSummary = resumeSummary;
+        this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
+    }
 }

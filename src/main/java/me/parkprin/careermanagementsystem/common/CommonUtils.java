@@ -2,6 +2,9 @@ package me.parkprin.careermanagementsystem.common;
 
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
+
 @Component
 public class CommonUtils {
 
@@ -14,5 +17,14 @@ public class CommonUtils {
             return false;
         }
         return true;
+    }
+
+    public byte [] base64ImageStringConvertByteArray(String base64ImageString){
+        return DatatypeConverter.parseBase64Binary(base64ImageString.split(",")[1]);
+    }
+
+    public String base64ImageByteArrayConvertString(byte[] base64BypeArray, String ImageType) throws UnsupportedEncodingException {
+        // // data:image/png;base64,
+        return "data:" + ImageType + ";base64," +  new String(base64BypeArray, "UTF8");
     }
 }
