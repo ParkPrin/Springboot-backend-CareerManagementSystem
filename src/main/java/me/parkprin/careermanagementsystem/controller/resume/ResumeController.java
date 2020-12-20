@@ -16,11 +16,24 @@ public class ResumeController {
     ResumeService resumeService;
 
     @PostMapping("/v1")
-    public ResponseDTO insertImage(@RequestBody ResumeDTO resumeDTO){
+    public ResponseDTO saveResume(@RequestBody ResumeDTO resumeDTO){
         try {
             return ResponseDTO.builder().state(200)
                     .responseType("image")
                     .responseValue(resumeService.save(resumeDTO)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
+
+    @GetMapping("/v1/{userId}")
+    public ResponseDTO selectResumeByUserId(@PathVariable String userId){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("image")
+                    .responseValue(resumeService.selectResumeByUserId(userId)).build();
         } catch (Exception e){
             return ResponseDTO.builder().state(400)
                     .responseType("Exception Message")

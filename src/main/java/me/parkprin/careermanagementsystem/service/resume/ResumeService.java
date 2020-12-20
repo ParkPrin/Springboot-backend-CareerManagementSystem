@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ResumeService {
@@ -46,5 +47,10 @@ public class ResumeService {
             throw new Exception("이력서 등록 중 오류가 발생하였습니다");
         }
         return resume;
+    }
+
+    public List<Resume> selectResumeByUserId(String userId) {
+        User user = userRepository.selectByUserId(userId);
+        return resumeRepository.selectByUserId(user.getId());
     }
 }
