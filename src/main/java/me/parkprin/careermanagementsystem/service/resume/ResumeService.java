@@ -1,5 +1,6 @@
 package me.parkprin.careermanagementsystem.service.resume;
 
+import me.parkprin.careermanagementsystem.common.CommonUtils;
 import me.parkprin.careermanagementsystem.domain.image.Image;
 import me.parkprin.careermanagementsystem.domain.resume.Resume;
 import me.parkprin.careermanagementsystem.domain.resume.ResumeRepository;
@@ -11,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -25,6 +29,9 @@ public class ResumeService {
 
     @Autowired
     ResumeRepository resumeRepository;
+
+    @Autowired
+    CommonUtils commonUtils;
 
     public Resume save(ResumeDTO resumeDTO) throws Exception {
         User user = userRepository.selectByUserId(resumeDTO.getUserId());
@@ -49,8 +56,32 @@ public class ResumeService {
         return resume;
     }
 
-    public List<Resume> selectResumeByUserId(String userId) {
+    public List<ResumeDTO> selectResumeByUserId(String userId) throws UnsupportedEncodingException {
+        //// data:image/png;base64,
         User user = userRepository.selectByUserId(userId);
-        return resumeRepository.selectByUserId(user.getId());
+        return imageChangeResumeList(resumeRepository.selectByUserId(user.getId()));
     }
+
+    public List<ResumeDTO> imageChangeResumeList(List<Resume> resumeList) throws UnsupportedEncodingException {
+
+        List<ResumeDTO> resumeDTOList = new ArrayList<ResumeDTO>();
+        Iterator<Resume> resumeIterator = resumeList.iterator();
+        while(resumeIterator.hasNext()) {
+            Resume resume = resumeIterator.next();
+            Image image = resume.getImage();
+            resumeDTOList.add(ResumeDTO.builder().
+                    userId(resume.getUser().getUserId()).
+                    imageId(image.getId()).
+                    imageName(image.getImageName()).
+                    imageType(image.getImageType()).
+                    data(commonUtils.base64ImageByteArrayConvertString(image.getData(), image.getImageType())).
+                    resumeName(resume.getResumeName()).
+                    resumeSummary(resume.getResumeSummary()).
+                    career(resume.getCareer()).
+                    resumeSalary(resume.getResumeSalary()).build());
+        }
+        return resumeDTOList;
+    }
+
+
 }

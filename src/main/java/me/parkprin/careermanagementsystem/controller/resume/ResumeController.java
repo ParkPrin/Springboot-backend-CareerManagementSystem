@@ -19,7 +19,7 @@ public class ResumeController {
     public ResponseDTO saveResume(@RequestBody ResumeDTO resumeDTO){
         try {
             return ResponseDTO.builder().state(200)
-                    .responseType("image")
+                    .responseType("resume")
                     .responseValue(resumeService.save(resumeDTO)).build();
         } catch (Exception e){
             return ResponseDTO.builder().state(400)
@@ -32,7 +32,7 @@ public class ResumeController {
     public ResponseDTO selectResumeByUserId(@PathVariable String userId){
         try {
             return ResponseDTO.builder().state(200)
-                    .responseType("image")
+                    .responseType("resume")
                     .responseValue(resumeService.selectResumeByUserId(userId)).build();
         } catch (Exception e){
             return ResponseDTO.builder().state(400)

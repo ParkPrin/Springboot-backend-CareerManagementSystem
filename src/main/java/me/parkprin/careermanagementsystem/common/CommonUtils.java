@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 
 @Component
 public class CommonUtils {
@@ -24,7 +25,7 @@ public class CommonUtils {
     }
 
     public String base64ImageByteArrayConvertString(byte[] base64BypeArray, String ImageType) throws UnsupportedEncodingException {
-        // // data:image/png;base64,
-        return "data:" + ImageType + ";base64," +  new String(base64BypeArray, "UTF8");
+        // data:image/png;base64,
+        return "data:" + ImageType + ";base64," + Base64.getEncoder().encodeToString(base64BypeArray);
     }
 }
