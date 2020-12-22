@@ -4,6 +4,7 @@ import me.parkprin.careermanagementsystem.common.CommonUtils;
 import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import me.parkprin.careermanagementsystem.service.image.ImageService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
@@ -38,17 +41,9 @@ public class ImageController {
         }
     }
 
-    @GetMapping("/v1/{imageId}")
-    public String getImage(@PathVariable Long imageId) throws UnsupportedEncodingException {
+    @GetMapping(value = "/v1/{imageId}")
+    public @ResponseBody byte[] getImage(@PathVariable Long imageId) throws IOException {
         String base64 = commonUtils.base64ImageByteArrayConvertString(imageService.getImage(imageId).getData(), imageService.getImage(imageId).getImageType());
-        Base64.getDecoder().decode(base64);
-
-        /*
-        byte[] image =Base64.getEncoder().encode(imageService.getImage(imageId).getData());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        headers.setContentLength(image.length);
-        return new HttpEntity<byte[]>(image, headers);*/
-        return commonUtils.base64ImageByteArrayConvertString(imageService.getImage(imageId).getData(), imageService.getImage(imageId).getImageType());
+        return Base64.getDecoder().decode(Base64.getEncoder().encode(base64.getBytes()));
     }
 }

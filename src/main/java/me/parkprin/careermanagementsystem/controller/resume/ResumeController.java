@@ -40,4 +40,17 @@ public class ResumeController {
                     .responseValue(e.getMessage()).build();
         }
     }
+
+    @DeleteMapping("/v1/{resumeId}")
+    public ResponseDTO removeResume(@PathVariable Long resumeId){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("resume")
+                    .responseValue(resumeService.removeResume(resumeId)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
 }

@@ -19,9 +19,10 @@ public class ResumeDTO {
     String resumeSalary;
 
     @Builder
-    public ResumeDTO(String userId, long imageId, String imageName, String imageType,
+    public ResumeDTO(long id, String userId, long imageId, String imageName, String imageType,
                      String data, String resumeName, String resumeSummary,
                      String career, String resumeSalary) {
+        this.id = id;
         this.userId = userId;
         this.imageId = imageId;
         this.imageName = imageName;

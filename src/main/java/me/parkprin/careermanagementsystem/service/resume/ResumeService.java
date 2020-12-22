@@ -70,6 +70,7 @@ public class ResumeService {
             Resume resume = resumeIterator.next();
             Image image = resume.getImage();
             resumeDTOList.add(ResumeDTO.builder().
+                    id(resume.getId()).
                     userId(resume.getUser().getUserId()).
                     imageId(image.getId()).
                     imageName(image.getImageName()).
@@ -81,6 +82,19 @@ public class ResumeService {
                     resumeSalary(resume.getResumeSalary()).build());
         }
         return resumeDTOList;
+    }
+
+    public boolean removeResume(Long resumeId) throws Exception {
+        boolean result = false;
+        try {
+            Resume resume = resumeRepository.findById(resumeId).get();
+            resumeRepository.deleteById(resumeId);
+            imageService.delete(resume.getImage());
+            result = true;
+        } catch (Exception e) {
+            throw new Exception();
+        }
+        return result;
     }
 
 
