@@ -28,6 +28,20 @@ public class ResumeController {
         }
     }
 
+    @PutMapping("/v1/{isChangeImage}")
+    public ResponseDTO updateResume(@RequestBody ResumeDTO resumeDTO,
+                                    @PathVariable boolean isChangeImage){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("resume")
+                    .responseValue(resumeService.update(resumeDTO, isChangeImage)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
+
     @GetMapping("/v1/{userId}")
     public ResponseDTO selectResumeByUserId(@PathVariable String userId){
         try {

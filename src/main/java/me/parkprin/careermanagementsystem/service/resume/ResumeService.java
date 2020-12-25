@@ -56,6 +56,26 @@ public class ResumeService {
         return resume;
     }
 
+    public Resume update(ResumeDTO resumeDTO, boolean isChangeImage) throws Exception {
+        Image image = null;
+        Resume resume = null;
+        try {
+            resume = resumeRepository.findById(resumeDTO.getId()).get();
+            if (isChangeImage) {
+                image = imageService.save(resumeDTO);
+                resume.setImage(image);
+            }
+            resume.setResumeName(resumeDTO.getResumeName());
+            resume.setResumeSalary(resumeDTO.getResumeSalary());
+            resume.setResumeSummary(resumeDTO.getResumeSummary());
+            resumeRepository.save(resume);
+        } catch (Exception e){
+            if (image != null) imageService.delete(image);
+            throw new Exception("이력서 등록 중 오류가 발생하였습니다");
+        }
+        return resume;
+    }
+
     public List<ResumeDTO> selectResumeByUserId(String userId) throws UnsupportedEncodingException {
         //// data:image/png;base64,
         User user = userRepository.selectByUserId(userId);

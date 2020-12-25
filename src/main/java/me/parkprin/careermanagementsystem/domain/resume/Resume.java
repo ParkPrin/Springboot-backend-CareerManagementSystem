@@ -3,6 +3,7 @@ package me.parkprin.careermanagementsystem.domain.resume;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import me.parkprin.careermanagementsystem.domain.BaseTimeEntity;
 import me.parkprin.careermanagementsystem.domain.image.Image;
 import me.parkprin.careermanagementsystem.domain.user.User;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Resume extends BaseTimeEntity {
