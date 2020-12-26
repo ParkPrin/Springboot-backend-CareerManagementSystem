@@ -42,7 +42,7 @@ public class ResumeController {
         }
     }
 
-    @GetMapping("/v1/{userId}")
+    @GetMapping("/list/v1/{userId}")
     public ResponseDTO selectResumeByUserId(@PathVariable String userId){
         try {
             return ResponseDTO.builder().state(200)
