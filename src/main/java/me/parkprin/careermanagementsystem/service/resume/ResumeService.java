@@ -33,6 +33,51 @@ public class ResumeService {
     @Autowired
     CommonUtils commonUtils;
 
+    public List<ResumeDTO> selectResumeByUserId(String userId) throws UnsupportedEncodingException {
+        //// data:image/png;base64,
+        User user = userRepository.selectByUserId(userId);
+        return imageChangeResumeList(resumeRepository.selectByUserId(user.getId()));
+    }
+
+    public List<ResumeDTO> imageChangeResumeList(List<Resume> resumeList) throws UnsupportedEncodingException {
+
+        List<ResumeDTO> resumeDTOList = new ArrayList<ResumeDTO>();
+        Iterator<Resume> resumeIterator = resumeList.iterator();
+        while(resumeIterator.hasNext()) {
+            Resume resume = resumeIterator.next();
+            Image image = resume.getImage();
+            resumeDTOList.add(ResumeDTO.builder().
+                    id(resume.getId()).
+                    userId(resume.getUser().getUserId()).
+                    imageId(image.getId()).
+                    imageName(image.getImageName()).
+                    imageType(image.getImageType()).
+                    data(commonUtils.base64ImageByteArrayConvertString(image.getData(), image.getImageType())).
+                    resumeName(resume.getResumeName()).
+                    resumeSummary(resume.getResumeSummary()).
+                    career(resume.getCareer()).
+                    resumeSalary(resume.getResumeSalary()).build());
+        }
+        return resumeDTOList;
+    }
+
+    public ResumeDTO selectResumeDetail(Long resumeId) throws UnsupportedEncodingException {
+        Resume resume = resumeRepository.findById(resumeId).get();
+        Image image = resume.getImage();
+        return ResumeDTO.builder().
+                id(resume.getId()).
+                userId(resume.getUser().getUserId()).
+                imageId(image.getId()).
+                imageName(image.getImageName()).
+                imageType(image.getImageType()).
+                data(commonUtils.base64ImageByteArrayConvertString(image.getData(), image.getImageType())).
+                resumeName(resume.getResumeName()).
+                resumeSummary(resume.getResumeSummary()).
+                career(resume.getCareer()).
+                resumeSalary(resume.getResumeSalary()).build();
+
+    }
+
     public Resume save(ResumeDTO resumeDTO) throws Exception {
         User user = userRepository.selectByUserId(resumeDTO.getUserId());
         Resume resume = null;
@@ -74,34 +119,6 @@ public class ResumeService {
             throw new Exception("이력서 등록 중 오류가 발생하였습니다");
         }
         return resume;
-    }
-
-    public List<ResumeDTO> selectResumeByUserId(String userId) throws UnsupportedEncodingException {
-        //// data:image/png;base64,
-        User user = userRepository.selectByUserId(userId);
-        return imageChangeResumeList(resumeRepository.selectByUserId(user.getId()));
-    }
-
-    public List<ResumeDTO> imageChangeResumeList(List<Resume> resumeList) throws UnsupportedEncodingException {
-
-        List<ResumeDTO> resumeDTOList = new ArrayList<ResumeDTO>();
-        Iterator<Resume> resumeIterator = resumeList.iterator();
-        while(resumeIterator.hasNext()) {
-            Resume resume = resumeIterator.next();
-            Image image = resume.getImage();
-            resumeDTOList.add(ResumeDTO.builder().
-                    id(resume.getId()).
-                    userId(resume.getUser().getUserId()).
-                    imageId(image.getId()).
-                    imageName(image.getImageName()).
-                    imageType(image.getImageType()).
-                    data(commonUtils.base64ImageByteArrayConvertString(image.getData(), image.getImageType())).
-                    resumeName(resume.getResumeName()).
-                    resumeSummary(resume.getResumeSummary()).
-                    career(resume.getCareer()).
-                    resumeSalary(resume.getResumeSalary()).build());
-        }
-        return resumeDTOList;
     }
 
     public boolean removeResume(Long resumeId) throws Exception {

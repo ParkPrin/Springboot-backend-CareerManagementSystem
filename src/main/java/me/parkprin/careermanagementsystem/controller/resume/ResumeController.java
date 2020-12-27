@@ -15,6 +15,32 @@ public class ResumeController {
     @Autowired
     ResumeService resumeService;
 
+    @GetMapping("/list/v1/{userId}")
+    public ResponseDTO selectResumeByUserId(@PathVariable String userId){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("resume")
+                    .responseValue(resumeService.selectResumeByUserId(userId)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
+
+    @GetMapping("/v1/{resumeId}")
+    public ResponseDTO selectResumeByUserId(@PathVariable Long resumeId){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("resume")
+                    .responseValue(resumeService.selectResumeDetail(resumeId)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
+
     @PostMapping("/v1")
     public ResponseDTO saveResume(@RequestBody ResumeDTO resumeDTO){
         try {
@@ -35,19 +61,6 @@ public class ResumeController {
             return ResponseDTO.builder().state(200)
                     .responseType("resume")
                     .responseValue(resumeService.update(resumeDTO, isChangeImage)).build();
-        } catch (Exception e){
-            return ResponseDTO.builder().state(400)
-                    .responseType("Exception Message")
-                    .responseValue(e.getMessage()).build();
-        }
-    }
-
-    @GetMapping("/list/v1/{userId}")
-    public ResponseDTO selectResumeByUserId(@PathVariable String userId){
-        try {
-            return ResponseDTO.builder().state(200)
-                    .responseType("resume")
-                    .responseValue(resumeService.selectResumeByUserId(userId)).build();
         } catch (Exception e){
             return ResponseDTO.builder().state(400)
                     .responseType("Exception Message")
