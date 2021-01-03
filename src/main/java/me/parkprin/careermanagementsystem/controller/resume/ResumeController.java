@@ -41,6 +41,19 @@ public class ResumeController {
         }
     }
 
+    @GetMapping("/v1/copy/{resumeId}")
+    public ResponseDTO copyResume(@PathVariable Long resumeId){
+        try {
+            return ResponseDTO.builder().state(200)
+                    .responseType("resume")
+                    .responseValue(resumeService.copyResume(resumeId)).build();
+        } catch (Exception e){
+            return ResponseDTO.builder().state(400)
+                    .responseType("Exception Message")
+                    .responseValue(e.getMessage()).build();
+        }
+    }
+
     @PostMapping("/v1")
     public ResponseDTO saveResume(@RequestBody ResumeDTO resumeDTO){
         try {

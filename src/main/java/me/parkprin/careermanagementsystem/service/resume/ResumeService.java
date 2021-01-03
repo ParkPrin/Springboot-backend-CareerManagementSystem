@@ -78,6 +78,33 @@ public class ResumeService {
 
     }
 
+    public ResumeDTO copyResume(Long resumeId) throws UnsupportedEncodingException {
+        Resume resume = resumeRepository.findById(resumeId).get();
+        Resume copyResume = resumeRepository.save(Resume.builder().
+                user(resume.getUser()).
+                image(resume.getImage()).
+                resumeName(resume.getResumeName()).
+                resumeSalary(resume.getResumeSalary()).
+                career(resume.getCareer()).
+                resumeSummary(resume.getResumeSummary()).
+                dateCreated(LocalDateTime.now()).
+                lastUpdated(LocalDateTime.now())
+                .build());
+        Image image = copyResume.getImage();
+        return ResumeDTO.builder().
+                id(copyResume.getId()).
+                userId(copyResume.getUser().getUserId()).
+                imageId(copyResume.getImage().getId()).
+                imageName(image.getImageName()).
+                imageType(image.getImageType()).
+                data(commonUtils.base64ImageByteArrayConvertString(image.getData(), image.getImageType())).
+                resumeName(copyResume.getResumeName()).
+                resumeSummary(copyResume.getResumeSummary()).
+                career(copyResume.getCareer()).
+                resumeSalary(copyResume.getResumeSalary()).build();
+
+    }
+
     public Resume save(ResumeDTO resumeDTO) throws Exception {
         User user = userRepository.selectByUserId(resumeDTO.getUserId());
         Resume resume = null;
@@ -126,7 +153,7 @@ public class ResumeService {
         try {
             Resume resume = resumeRepository.findById(resumeId).get();
             resumeRepository.deleteById(resumeId);
-            imageService.delete(resume.getImage());
+            if (resumeRepository.selectByImageId(resume.getImage().getId()).size() < 2) imageService.delete(resume.getImage());
             result = true;
         } catch (Exception e) {
             throw new Exception();

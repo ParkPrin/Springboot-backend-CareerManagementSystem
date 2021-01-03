@@ -10,4 +10,7 @@ public interface ResumeRepository extends JpaRepository<Resume, Long> {
 
     @Query(value = "SELECT r.* FROM resume r WHERE r.user_id = :userId", nativeQuery = true)
     List<Resume> selectByUserId(@Param("userId") Long userId);
+
+    @Query(value = "SELECT r.* FROM resume r WHERE r.imageId = :imageId", nativeQuery = true)
+    List<Resume> selectByImageId(@Param("imageId") Long imageId);
 }
