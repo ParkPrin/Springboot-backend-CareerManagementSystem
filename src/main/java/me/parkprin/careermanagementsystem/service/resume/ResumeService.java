@@ -153,7 +153,7 @@ public class ResumeService {
         try {
             Resume resume = resumeRepository.findById(resumeId).get();
             resumeRepository.deleteById(resumeId);
-            if (resumeRepository.selectByImageId(resume.getImage().getId()).size() < 2) imageService.delete(resume.getImage());
+            if (resumeRepository.selectByImageId(resume.getImage().getId()).size() == 0) imageService.delete(resume.getImage());
             result = true;
         } catch (Exception e) {
             throw new Exception();
