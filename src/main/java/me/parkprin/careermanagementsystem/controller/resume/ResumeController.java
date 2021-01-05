@@ -2,11 +2,9 @@ package me.parkprin.careermanagementsystem.controller.resume;
 
 import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.resume.ResumeDTO;
-import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import me.parkprin.careermanagementsystem.service.resume.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/resume/api")

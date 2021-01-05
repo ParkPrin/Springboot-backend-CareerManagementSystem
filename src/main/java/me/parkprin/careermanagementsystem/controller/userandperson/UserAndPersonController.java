@@ -1,6 +1,5 @@
 package me.parkprin.careermanagementsystem.controller.userandperson;
 
-import me.parkprin.careermanagementsystem.common.CommonUtils;
 import me.parkprin.careermanagementsystem.dto.response.ResponseDTO;
 import me.parkprin.careermanagementsystem.dto.userandperson.UserAndPersonDTO;
 import me.parkprin.careermanagementsystem.service.userandperson.UserAndPersonService;
